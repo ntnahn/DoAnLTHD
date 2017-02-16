@@ -1,0 +1,13 @@
+E:\Desktop\HCDH\HK32016\LTHD\DoAn\1542250-1542279\DoAnLTHD\AppDienThoaiVien\AppDienThoaiVien\bin\Debug\AppDienThoaiVien.exe.config
+E:\Desktop\HCDH\HK32016\LTHD\DoAn\1542250-1542279\DoAnLTHD\AppDienThoaiVien\AppDienThoaiVien\bin\Debug\AppDienThoaiVien.exe
+E:\Desktop\HCDH\HK32016\LTHD\DoAn\1542250-1542279\DoAnLTHD\AppDienThoaiVien\AppDienThoaiVien\bin\Debug\AppDienThoaiVien.pdb
+E:\Desktop\HCDH\HK32016\LTHD\DoAn\1542250-1542279\DoAnLTHD\AppDienThoaiVien\AppDienThoaiVien\bin\Debug\Newtonsoft.Json.dll
+E:\Desktop\HCDH\HK32016\LTHD\DoAn\1542250-1542279\DoAnLTHD\AppDienThoaiVien\AppDienThoaiVien\bin\Debug\Newtonsoft.Json.xml
+E:\Desktop\HCDH\HK32016\LTHD\DoAn\1542250-1542279\DoAnLTHD\AppDienThoaiVien\AppDienThoaiVien\obj\Debug\AppDienThoaiVien.csprojResolveAssemblyReference.cache
+E:\Desktop\HCDH\HK32016\LTHD\DoAn\1542250-1542279\DoAnLTHD\AppDienThoaiVien\AppDienThoaiVien\obj\Debug\AppDienThoaiVien.Properties.Resources.resources
+E:\Desktop\HCDH\HK32016\LTHD\DoAn\1542250-1542279\DoAnLTHD\AppDienThoaiVien\AppDienThoaiVien\obj\Debug\AppDienThoaiVien.csproj.GenerateResource.Cache
+E:\Desktop\HCDH\HK32016\LTHD\DoAn\1542250-1542279\DoAnLTHD\AppDienThoaiVien\AppDienThoaiVien\obj\Debug\AppDienThoaiVien.exe
+E:\Desktop\HCDH\HK32016\LTHD\DoAn\1542250-1542279\DoAnLTHD\AppDienThoaiVien\AppDienThoaiVien\obj\Debug\AppDienThoaiVien.pdb
+E:\Desktop\HCDH\HK32016\LTHD\DoAn\1542250-1542279\DoAnLTHD\AppDienThoaiVien\AppDienThoaiVien\bin\Debug\System.Net.Http.Formatting.dll
+E:\Desktop\HCDH\HK32016\LTHD\DoAn\1542250-1542279\DoAnLTHD\AppDienThoaiVien\AppDienThoaiVien\bin\Debug\System.Net.Http.Formatting.xml
+E:\Desktop\HCDH\HK32016\LTHD\DoAn\1542250-1542279\DoAnLTHD\AppDienThoaiVien\AppDienThoaiVien\obj\Debug\AppDienThoaiVien.FormDienThoaiVien.resources

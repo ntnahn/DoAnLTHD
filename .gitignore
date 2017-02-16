@@ -1,0 +1,5 @@
+ServerService/node_modules/
+ServerService/.idea/
+ServerService/npm-debug.log
+ServerService/*.log.*
+ServerService/.vscode/
