@@ -24,10 +24,11 @@ mongoose.connect(mongoURL, (error) => {
 
 const app = new Express();
 var pointRoute = require('./server/routes/point.routes.js');
+var userRoute = require('./server/routes/user.routes.js');
 // Use to receive json from body post method
 app.use(bodyParser.json({ limit: '20mb' }));
 // Use to make routes
-app.use('/api', [pointRoute]);
+app.use('/api', [pointRoute, userRoute]);
 // Use client Folder as root asset
 app.use('/', Express.static(path.resolve(__dirname, './public')));
 
