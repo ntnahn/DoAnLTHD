@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import GoogleMap from 'google-map-react';
 import Maker from './Maker.js';
+import SearchBox from './SearchBox.js';
 function createMapOptions(maps) {
   // next props are exposed at maps
   // "Animation", "ControlPosition", "MapTypeControlStyle", "MapTypeId",
@@ -16,26 +17,34 @@ function createMapOptions(maps) {
     mapTypeControlOptions: {
       position: maps.ControlPosition.TOP_RIGHT
     },
-    mapTypeControl: true
+    mapTypeControl: true,
+
   };
 }
 export default class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hoverKey: ''
+      hoverKey: '',
+      bounds: null,
+      nearCarPlaces: [
+        {id: 'A', lat: 59.955413, lng: 30.337844},
+        {id: 'B', lat: 59.724465, lng: 30.080121}
+      ],
+      yourPlace: {id: 'Your', lat: 59.70990117354236, lng: 30.672240007812434}
     };
     this._onBoundsChange = this._onBoundsChange.bind(this);
     this._onChildClick = this._onChildClick.bind(this);
     this._onChildMouseEnter = this._onChildMouseEnter.bind(this);
     this._onChildMouseLeave = this._onChildMouseLeave.bind(this);
     this._onChildMouseMove = this._onChildMouseMove.bind(this);
+    this.mapOnClick = this.mapOnClick.bind(this);
   }
   changeHoverKey(hoverKey) {
     this.setState({hoverKey});
   }
   _onBoundsChange(center, zoom, bounds, marginBounds) {
-
+    this.setState({bounds});
   };
   _onChildClick(key, childProps) {
     this.changeHoverKey(key);
@@ -48,14 +57,24 @@ export default class Map extends Component {
   _onChildMouseLeave(key, childProps) {
     this.changeHoverKey(null);
   }
-  _onChildMouseMove(key, childProps) {
+  _onChildMouseMove(key, childProps, newLocation) {
     console.log('_onChildMouseMove:');
     console.log('key:', key);
     console.log('childProps:', childProps);
+    console.log('newLocation:', newLocation);
+  }
+  mapOnClick(location) {
+    console.log('on map click');
+    console.log(location);
+    let {lat, lng} = location;
+    let yourPlace = this.state.yourPlace;
+    yourPlace.lat = lat;
+    yourPlace.lng = lng;
+    this.setState({yourPlace});
   }
 
   render() {
-    const places = this.props.greatPlaces
+    const places = this.state.nearCarPlaces
       .map(place => {
         const {id, ...coords} = place;
         return (
@@ -65,6 +84,12 @@ export default class Map extends Component {
             hover={this.state.hoverKey === id} />
         );
       });
+    const {yourPlaceID, ...yourCoords} = this.state.yourPlace;
+    const yourPlace =
+      <Maker
+        key={yourPlaceID}
+        {...yourCoords}
+        hover={this.state.hoverKey === yourPlaceID} />;
     return (
       <div className="map-frame">
         <GoogleMap
@@ -77,8 +102,14 @@ export default class Map extends Component {
           onChildMouseEnter={this._onChildMouseEnter}
           onChildMouseLeave={this._onChildMouseLeave}
           onChildMouseMove={this._onChildMouseMove}
-          hoverDistance={20}>
+          hoverDistance={20}
+          draggable={true}
+          onClick={this.mapOnClick}
+        >
+          <SearchBox ref="searchBox"
+            bounds={this.state.bounds}/>
           {places}
+          {yourPlace}
         </GoogleMap>
       </div>
     );
@@ -91,9 +122,5 @@ Map.propTypes = {
 };
 Map.defaultProps = {
   center: [59.938043, 30.337157],
-  zoom: 9,
-  greatPlaces: [
-    {id: 'A', lat: 59.955413, lng: 30.337844},
-    {id: 'B', lat: 59.724465, lng: 30.080121}
-    ]
+  zoom: 9
 };
