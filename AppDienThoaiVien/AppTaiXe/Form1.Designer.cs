@@ -24,9 +24,9 @@
         /// </summary>
         private void InitializeComponent() {
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtPass = new System.Windows.Forms.TextBox();
             this.btnDangNhap = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -39,12 +39,12 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Name";
             // 
-            // textBox1
+            // txtName
             // 
-            this.textBox1.Location = new System.Drawing.Point(118, 26);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(232, 20);
-            this.textBox1.TabIndex = 1;
+            this.txtName.Location = new System.Drawing.Point(118, 26);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(232, 20);
+            this.txtName.TabIndex = 1;
             // 
             // label2
             // 
@@ -55,12 +55,13 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Password";
             // 
-            // textBox2
+            // txtPass
             // 
-            this.textBox2.Location = new System.Drawing.Point(118, 80);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(232, 20);
-            this.textBox2.TabIndex = 3;
+            this.txtPass.Location = new System.Drawing.Point(118, 80);
+            this.txtPass.Name = "txtPass";
+            this.txtPass.PasswordChar = '*';
+            this.txtPass.Size = new System.Drawing.Size(232, 20);
+            this.txtPass.TabIndex = 3;
             // 
             // btnDangNhap
             // 
@@ -70,6 +71,7 @@
             this.btnDangNhap.TabIndex = 4;
             this.btnDangNhap.Text = "Đăng nhập";
             this.btnDangNhap.UseVisualStyleBackColor = true;
+            this.btnDangNhap.Click += new System.EventHandler(this.btnDangNhap_Click);
             // 
             // Form1
             // 
@@ -77,9 +79,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(410, 180);
             this.Controls.Add(this.btnDangNhap);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txtPass);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtName);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Đăng nhập";
@@ -91,9 +93,9 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtPass;
         private System.Windows.Forms.Button btnDangNhap;
     }
 }

@@ -20,6 +20,8 @@ D:\HOAN_CHINH\HKIII\1.LTHD\DoAnLTHD\AppDienThoaiVien\AppTaiXe\bin\Debug\SocketIo
 D:\HOAN_CHINH\HKIII\1.LTHD\DoAnLTHD\AppDienThoaiVien\AppTaiXe\bin\Debug\WebSocket4Net.dll
 D:\HOAN_CHINH\HKIII\1.LTHD\DoAnLTHD\AppDienThoaiVien\AppTaiXe\bin\Debug\Newtonsoft.Json.xml
 D:\HOAN_CHINH\HKIII\1.LTHD\DoAnLTHD\AppDienThoaiVien\AppTaiXe\obj\Debug\AppTaiXe.csprojResolveAssemblyReference.cache
+D:\HOAN_CHINH\HKIII\1.LTHD\DoAnLTHD\AppDienThoaiVien\AppTaiXe\obj\Debug\Interop.WinHttp.dll
+D:\HOAN_CHINH\HKIII\1.LTHD\DoAnLTHD\AppDienThoaiVien\AppTaiXe\obj\Debug\AppTaiXe.csproj.ResolveComReference.cache
 D:\HOAN_CHINH\HKIII\1.LTHD\DoAnLTHD\AppDienThoaiVien\AppTaiXe\obj\Debug\AppTaiXe.Form1.resources
 D:\HOAN_CHINH\HKIII\1.LTHD\DoAnLTHD\AppDienThoaiVien\AppTaiXe\obj\Debug\AppTaiXe.Properties.Resources.resources
 D:\HOAN_CHINH\HKIII\1.LTHD\DoAnLTHD\AppDienThoaiVien\AppTaiXe\obj\Debug\AppTaiXe.csproj.GenerateResource.Cache

@@ -11,10 +11,28 @@ exports.checkUser = function(req, res)
 	      res.status(500).send(err);
 	    }
 	    if (user) {
-	    	res.json(true);
+	    	res.json(user.id);
 	    } else {
-	    	res.json(false);
+	    	res.json(null);
 	    }
     	
   	});
 };
+
+exports.getUser = function (req, res) {
+	let id = req.params.userId;
+    User.findOne({id: id}).exec((err, user) => {
+        if (err) {
+            res.status(500).send(err);
+        }
+        if (user) {
+            res.json(user);
+        } else {
+            res.json(null);
+        }
+    });
+};
+
+exports.updateUser = function (req, res) {
+
+}

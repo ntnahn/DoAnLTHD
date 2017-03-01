@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿//using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -42,7 +42,6 @@ namespace AppDienThoaiVien
                         note = rtbGhiChu.Text
                     }
                 };
-
                 var response = client.PostAsJsonAsync(url, point).Result;
                 if (response.IsSuccessStatusCode) {
                     var pointAdded = response.Content
