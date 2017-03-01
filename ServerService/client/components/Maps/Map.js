@@ -1,126 +1,200 @@
 import React, {Component, PropTypes} from 'react';
-import GoogleMap from 'google-map-react';
-import Maker from './Maker.js';
-import SearchBox from './SearchBox.js';
-function createMapOptions(maps) {
-  // next props are exposed at maps
-  // "Animation", "ControlPosition", "MapTypeControlStyle", "MapTypeId",
-  // "NavigationControlStyle", "ScaleControlStyle", "StrokePosition", "SymbolPath", "ZoomControlStyle",
-  // "DirectionsStatus", "DirectionsTravelMode", "DirectionsUnitSystem", "DistanceMatrixStatus",
-  // "DistanceMatrixElementStatus", "ElevationStatus", "GeocoderLocationType", "GeocoderStatus", "KmlLayerStatus",
-  // "MaxZoomStatus", "StreetViewStatus", "TransitMode", "TransitRoutePreference", "TravelMode", "UnitSystem"
-  return {
-    zoomControlOptions: {
-      position: maps.ControlPosition.RIGHT_BOTTOM,
-      style: maps.ZoomControlStyle.SMALL
-    },
-    mapTypeControlOptions: {
-      position: maps.ControlPosition.TOP_RIGHT
-    },
-    mapTypeControl: true,
-
-  };
-}
 export default class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hoverKey: '',
-      bounds: null,
-      nearCarPlaces: [
-        {id: 'A', lat: 59.955413, lng: 30.337844},
-        {id: 'B', lat: 59.724465, lng: 30.080121}
-      ],
-      yourPlace: {id: 'Your', lat: 59.70990117354236, lng: 30.672240007812434}
+      address: ''
     };
-    this._onBoundsChange = this._onBoundsChange.bind(this);
-    this._onChildClick = this._onChildClick.bind(this);
-    this._onChildMouseEnter = this._onChildMouseEnter.bind(this);
-    this._onChildMouseLeave = this._onChildMouseLeave.bind(this);
-    this._onChildMouseMove = this._onChildMouseMove.bind(this);
-    this.mapOnClick = this.mapOnClick.bind(this);
-  }
-  changeHoverKey(hoverKey) {
-    this.setState({hoverKey});
-  }
-  _onBoundsChange(center, zoom, bounds, marginBounds) {
-    this.setState({bounds});
-  };
-  _onChildClick(key, childProps) {
-    this.changeHoverKey(key);
-  }
+    
+    this.yourMarker = null;
+    this.driverLocations = [
+      {lat: 10.767647398680138, lng: 106.67454242706299},
+      {lat: 10.759173173901845, lng: 106.67752504348755},
+      {lat: 10.75740241027677, lng: 106.66718244552612},
+      {lat: 10.763347075583702, lng: 106.6592001914978}
+    ];
+    this.driverMarkers = [];
 
-  _onChildMouseEnter(key, childProps) {
-    this.changeHoverKey(key);
+    this.handleGeocode = this.handleGeocode.bind(this);
+    this.handleAddressChange = this.handleAddressChange.bind(this);
   }
-
-  _onChildMouseLeave(key, childProps) {
-    this.changeHoverKey(null);
-  }
-  _onChildMouseMove(key, childProps, newLocation) {
-    console.log('_onChildMouseMove:');
-    console.log('key:', key);
-    console.log('childProps:', childProps);
-    console.log('newLocation:', newLocation);
-  }
-  mapOnClick(location) {
-    console.log('on map click');
-    console.log(location);
-    let {lat, lng} = location;
-    let yourPlace = this.state.yourPlace;
-    yourPlace.lat = lat;
-    yourPlace.lng = lng;
-    this.setState({yourPlace});
-  }
-
-  render() {
-    const places = this.state.nearCarPlaces
-      .map(place => {
-        const {id, ...coords} = place;
-        return (
-          <Maker
-            key={id}
-            {...coords}
-            hover={this.state.hoverKey === id} />
-        );
+  componentWillReceiveProps(props) {
+    if(props.address&&props.address!=='') {
+      Promise.resolve(this.setState({address: props.address})).then(()=>{
+        this.geocodeAddress();
       });
-    const {yourPlaceID, ...yourCoords} = this.state.yourPlace;
-    const yourPlace =
-      <Maker
-        key={yourPlaceID}
-        {...yourCoords}
-        hover={this.state.hoverKey === yourPlaceID} />;
+    }
+  }
+  render() {
     return (
       <div className="map-frame">
-        <GoogleMap
-          bootstrapURLKeys={{key: 'AIzaSyCqQ9YJ0YZX7_luhPCv3uBE_XURtUo3vLg'}}
-          center={this.props.center}
-          zoom={this.props.zoom}
-          options={createMapOptions}
-          onChange={this._onBoundsChange}
-          onChildClick={this._onChildClick}
-          onChildMouseEnter={this._onChildMouseEnter}
-          onChildMouseLeave={this._onChildMouseLeave}
-          onChildMouseMove={this._onChildMouseMove}
-          hoverDistance={20}
-          draggable={true}
-          onClick={this.mapOnClick}
-        >
-          <SearchBox ref="searchBox"
-            bounds={this.state.bounds}/>
-          {places}
-          {yourPlace}
-        </GoogleMap>
+        <div className="map" ref={node=>this.mapElement=node}></div>
+        <div className="floating-panel">
+          <input
+            className="textAddress"
+            type="textbox"
+            onChange={this.handleAddressChange}
+            value={this.state.address}/>
+          <input
+            className="button"
+            type="button"
+            value="Geocode"
+            onClick={this.handleGeocode}/>
+        </div>
       </div>
     );
   }
+  handleGeocode() {
+    this.geocodeAddress();
+  }
+  handleAddressChange(event) {
+    this.setState({address: event.target.value});
+  }
+  componentDidMount() {
+    window.onload = () => {
+      this.map = new google.maps.Map(this.mapElement, {
+        zoom: 12,
+        center: {lat: 10.769284917844956, lng: 106.6663775333709},
+        mapTypeControl: true,
+        mapTypeControlOptions: {
+          style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+          position: google.maps.ControlPosition.LEFT_BOTTOM
+        },
+      });
+      this.geocoder = new google.maps.Geocoder();
+
+      this.map.addListener('click', (event)=>{
+        this.replaceYourMarker(event.latLng);
+        let lat = event.latLng.lat();
+        let lng = event.latLng.lng();
+        this.reverseGeocodeLatLng(lat, lng);
+        console.log('location: ');
+        console.log(`{lat: ${lat}, lng: ${lng}}`);
+      });
+
+      this.loadDriverMarkers();
+    };
+  }
+  replaceYourMarker(location) {
+    // Nếu đã geocode rồi thì mới có cái để replace
+    if(this.yourMarker) {
+      this.removeMarker(this.yourMarker);
+      this.yourMarker = new google.maps.Marker({
+        position: location,
+        map: this.map,
+        draggable: true
+      });
+      this.addMarkerDragEvent(this.yourMarker);
+    }
+  }
+  geocodeAddress() {
+    let address = this.state.address;
+    this.geocoder.geocode({'address': address}, (results, status)=>{
+      if (status === 'OK') {
+        this.map.setCenter(results[0].geometry.location);
+        console.log('results[0].geometry.location', results[0].geometry.location);
+        Promise.resolve(this.removeMarker(this.yourMarker)).then(()=>{
+          this.yourMarker = new google.maps.Marker({
+            map: this.map,
+            position: results[0].geometry.location,
+            draggable: true
+          });
+          this.addMarkerDragEvent(this.yourMarker);
+        });
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+  }
+  removeMarker(marker) {
+    if(marker) {
+      marker.setMap(null);
+    }
+  }
+  addMarkerDragEvent(marker){
+    google.maps.event.addListener(marker, 'dragend', (e)=>{
+      let lat = e.latLng.lat();
+      let lng = e.latLng.lng();
+      // console.log('location: ', {lat, lng});
+      this.reverseGeocodeLatLng(lat, lng);
+    });
+    // google.maps.event.addListener(marker, 'drag', (e)=>{
+    //   let lat = e.latLng.lat();
+    //   let lng = e.latLng.lng();
+    //   console.log('location: ', {lat, lng});
+    // });
+  }
+  reverseGeocodeLatLng(lat, lng) {
+    var latlng = {lat, lng};
+    this.geocoder.geocode({'location': latlng}, (results, status)=>{
+      if (status === 'OK') {
+        if (results[1]) {
+          let address = results[1].formatted_address;
+          this.setState({address});
+        } else {
+          window.alert('No results found');
+        }
+      } else {
+        window.alert('Geocoder failed due to: ' + status);
+      }
+    });
+  }
+
+  /**
+   * Location: {lat: 10.766688427994012, lng: 106.68370485305786}
+   * @param location
+   */
+  addDriverMarker(location) {
+    let marker = new google.maps.Marker({
+      position: location,
+      map: this.map,
+      icon:'images/bike_location_icon40x40.png'
+    });
+    marker.addListener('click', function() {
+      console.log('Driver marker click');
+      // todo: Lấy thông tin của marker(tài khoản của tài xế)
+      // Sau khi chọn tài xế, nhấn nút gửi yêu cầu để
+      // => Send the socket request to App tài xế
+      // infowindow.open(map, marker);
+    });
+    this.driverMarkers.push(marker);
+  }
+
+  // Tải marker từ địa điểm của các xe ở gần
+  loadDriverMarkers() {
+    this.driverLocations.map((location)=>{
+      this.addDriverMarker(location);
+    });
+  }
+
+  // Sets the map on all markers in the array.
+  setMapForDriverMarker(map) {
+    this.driverLocations.map((marker)=>{
+      marker.setMap(map);
+    });
+  }
+
+  // Removes the markers from the map, but keeps them in the array.
+  clearDriverMarkers() {
+    this.setMapForDriverMarker(null);
+  }
+
+  // Shows any markers currently in the array.
+  showDriverMarkers() {
+    this.setMapForDriverMarker(map);
+  }
+
+  // Deletes all markers in the array by removing references to them.
+  deleteDriverMarkers() {
+    this.clearDriverMarkers();
+    this.driverMarkers = [];
+  }
 }
 Map.propTypes = {
-  center: PropTypes.array,
-  zoom: PropTypes.number,
-  greatPlaceCoords: PropTypes.any
+  address: PropTypes.string,
 };
-Map.defaultProps = {
-  center: [59.938043, 30.337157],
-  zoom: 9
-};
+
+/**
+ * Random location in HCMC
+ *
+ **/

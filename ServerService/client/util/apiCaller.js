@@ -1,9 +1,7 @@
 import fetch from 'isomorphic-fetch';
-import Config from '../../server/config';
 
 export const API_URL = (typeof window === 'undefined' || process.env.NODE_ENV === 'test') ?
-  process.env.BASE_URL || (8080+`:${process.env.PORT || Config.port}/api`) :
-  '/api';
+  process.env.BASE_URL || ('http://localhost:8080/api'):'/api';
 
 export default function callApi(endpoint, method = 'get', body) {
   return fetch(`${API_URL}/${endpoint}`, {
@@ -16,7 +14,6 @@ export default function callApi(endpoint, method = 'get', body) {
     if (!response.ok) {
       return Promise.reject(json);
     }
-
     return json;
   })
   .then(

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AppDienThoaiVien
 {
-    class Point
+    class Client
     {
         public string ID { get; set; }
         public string Address { get; set; }
