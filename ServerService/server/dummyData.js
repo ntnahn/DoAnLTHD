@@ -69,7 +69,7 @@ module.exports = function () {
                     "lat" : 10.763347075583702,
                     "lng" : 106.6592001914978
                 }
-            }),
+            })
         ];
 
         User.create(users, (error) => {

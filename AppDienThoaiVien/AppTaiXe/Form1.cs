@@ -42,10 +42,14 @@ namespace AppTaiXe
                     HttpResponseMessage response = client.PutAsJsonAsync(url, user).Result;
                     if (response.IsSuccessStatusCode)
                     {
-                        var result = response.Content.ReadAsAsync<String>().Result;
-                        if (result != null)
+                        User driver = response.Content.ReadAsAsync<User>().Result;
+                        if (driver != null)
                         {
-                            MessageBox.Show("Success " + result);
+                            DriverMain DriverMain = new DriverMain();
+                            DriverMain.Driver = driver;
+                            this.Hide();
+                            DriverMain.Show();
+                           
                           
                         }
                         else
