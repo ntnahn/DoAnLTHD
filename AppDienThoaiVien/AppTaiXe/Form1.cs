@@ -22,7 +22,22 @@ namespace AppTaiXe
         public Form1()
         {
             InitializeComponent();
+<<<<<<< HEAD
+=======
+            
         }
+
+        void Form1_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            MessageBox.Show("Key Down");
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnDangNhap.PerformClick();
+            }
+            throw new System.NotImplementedException();
+>>>>>>> 90edf4c0efa41c76e21ecdc28b24fc1fa69c0404
+        }
+
 
         private void btnDangNhap_Click(object sender, EventArgs e)
         {
@@ -45,6 +60,7 @@ namespace AppTaiXe
                         User driver = response.Content.ReadAsAsync<User>().Result;
                         if (driver != null)
                         {
+                            lblError.Text = "";
                             DriverMain DriverMain = new DriverMain();
                             DriverMain.Driver = driver;
                             this.user = driver;
@@ -54,7 +70,7 @@ namespace AppTaiXe
                         }
                         else
                         {
-                            MessageBox.Show("Please check username or password, not correctly!!");
+                            lblError.Text = "Please check username or password, not correctly!!";
                         }
                     }
                 }
@@ -67,18 +83,19 @@ namespace AppTaiXe
             String name = txtName.Text.Trim();
             if (String.IsNullOrEmpty(name))
             {
-                MessageBox.Show("Please insert name");
+                lblError.Text = "Please insert name";
                 return false;
             }
             String pass = txtPass.Text.Trim();
             if (String.IsNullOrEmpty(pass))
             {
-                MessageBox.Show("Please insert password");
+                lblError.Text = "Please insert password";
                 return false;
             }
             return true;
         }
 
+<<<<<<< HEAD
         private void doConnectToSocket(String userID) {
             // Connect to socket
             var socket = IO.Socket("http://localhost:8080/");
@@ -92,6 +109,16 @@ namespace AppTaiXe
             });
             socket.Emit("DriverResponse", JsonConvert.SerializeObject(new{abc = "abc"}));
             this.socket = socket;
+=======
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            lblError.Text = "";
+        }
+
+        private void btnDangNhap_Keypress(object sender, KeyPressEventArgs e)
+        {
+
+>>>>>>> 90edf4c0efa41c76e21ecdc28b24fc1fa69c0404
         }
     }
 }
