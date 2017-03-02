@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AppTaiXe.model
 {
-    class Guest
+    public class Guest
     {
         private String id;
 

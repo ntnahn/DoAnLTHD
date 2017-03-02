@@ -66,16 +66,16 @@ namespace AppTaiXe
             timer.AutoReset = true;
             timer.Elapsed += new System.Timers.ElapsedEventHandler(OnTimedEvent);
             timer.Start();
+            this.listenningSocketIo();
         }
 
         private void listenningSocketIo()
         {
+            socket.Emit("clientConnect", driver.Id);
             socket.On("DriverRequest", (data) =>
             {
-                guest = JsonConvert.DeserializeObject<Guest>(data as String);
-                NotificationGuest notificationGuest = new NotificationGuest();
-                notificationGuest.DriverMain = this;
-                notificationGuest.Guest = guest;
+                guest = JsonConvert.DeserializeObject<Guest>(data.ToString());
+                NotificationGuest notificationGuest = new NotificationGuest(this, guest);
                 notificationGuest.Show();
             });
         }
@@ -110,6 +110,7 @@ namespace AppTaiXe
             if (userUpdated != null)
             {
                 driver = userUpdated;
+                socket.Emit("updateLocation");
             }
         }
 

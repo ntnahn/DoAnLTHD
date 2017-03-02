@@ -179,10 +179,7 @@ module.exports = function () {
                 "password" : "12345",
                 "status" : "ready",
                 "vehicletype" : "premium",
-                "location" : {
-                    "lat" : 10.770439,
-                    "lng" : 106.676786
-                }
+                "location" : {lat: 10.755035446976354, lng: 106.68612957000732}
             }),
             new User({
                 id: 'user3kv4q01ck7453ualdnd06',

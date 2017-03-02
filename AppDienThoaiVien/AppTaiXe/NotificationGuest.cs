@@ -14,31 +14,22 @@ namespace AppTaiXe
 {
     public partial class NotificationGuest : Form
     {
-        private Guest guest;
-        private DriverMain driverMain;
+        internal Guest guestInfo;
+        internal DriverMain driverMain;
 
-        public DriverMain DriverMain
-        {
-            get { return driverMain; }
-            set { driverMain = value; }
-        }
-
-        internal Guest Guest
-        {
-            get { return guest; }
-            set { guest = value; }
-        }
-        public NotificationGuest()
+        public NotificationGuest(DriverMain _driverMain, Guest _guest)
         {
             InitializeComponent();
+            this.driverMain = _driverMain;
+            this.guestInfo = _guest;
         }
 
         private void NotificationGuest_Load(object sender, EventArgs e)
         {
-            if (guest != null)
+            if (guestInfo != null)
             {
-                lblPhone.Text = guest.Phone;
-                lblAdress.Text = guest.Address;
+                lblPhone.Text = guestInfo.Phone;
+                lblAdress.Text = guestInfo.Address;
             }
             else
             {

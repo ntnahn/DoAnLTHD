@@ -34,16 +34,17 @@ module.exports = class socketIOController {
         // Gửi yêu cầu tới tài xế
         // todo: kiểm tra tài xế có online hay ko
         // có thể chỉ load lên map các tài xế online
-        console.log('DriverRequest:', data);
         let userID = data.user.id; // Mã của tài xế
         let client = data.client;
         let dataTransfer = {
           id: client.id,
           phone: client.phone,
+          address: client.address,
           status: client.status,
           type: client.type,
           NvDvId: data.NvDvId
         };
+        console.log('DriverRequest:', dataTransfer);
         if(socketIDs[userID]) {
           io.to(socketIDs[userID]).emit('DriverRequest', dataTransfer);
         }
