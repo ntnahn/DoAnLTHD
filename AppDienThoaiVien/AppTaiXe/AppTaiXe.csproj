@@ -80,6 +80,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="model\Guest.cs" />
     <Compile Include="model\Location.cs" />
     <Compile Include="model\User.cs" />
     <Compile Include="NotificationGuest.cs">

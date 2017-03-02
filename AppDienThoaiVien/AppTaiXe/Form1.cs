@@ -18,10 +18,7 @@ namespace AppTaiXe
         public Form1()
         {
             InitializeComponent();
-            //var socket = IO.Socket("http://localhost:8080/");
-            //socket.On(Socket.EVENT_CONNECT, () => {
-
-            //});
+            
         }
 
         void Form1_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)

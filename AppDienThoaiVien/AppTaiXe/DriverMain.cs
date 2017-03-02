@@ -12,6 +12,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Timers;
+using Quobject.SocketIoClientDotNet.Client;
+using Newtonsoft.Json;
 
 namespace AppTaiXe
 {
@@ -64,6 +66,21 @@ namespace AppTaiXe
             timer.Start();
         }
 
+        private void listenningSocketIo()
+        {
+            var socket = IO.Socket("http://localhost:8080/");
+            socket.On(Socket.EVENT_MESSAGE, (data) =>
+            {
+                User user = JsonConvert.DeserializeObject<User>(data as String);
+            });
+
+            socket.On(Socket.EVENT_CONNECT, (data) =>
+            {
+                User user = JsonConvert.DeserializeObject<User>(data as String);
+            });
+
+        }
+
         private void DriverMain_Close(object sender, EventArgs e)
         {
             timer.Stop();
@@ -109,7 +126,7 @@ namespace AppTaiXe
                     User user = response.Content.ReadAsAsync<User>().Result;
                     if (user != null)
                     {
-                        MessageBox.Show("Success update location!!");
+                        //MessageBox.Show("Success update location!!");
                         return user;
                     }
                     else

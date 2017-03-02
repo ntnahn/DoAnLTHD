@@ -32,9 +32,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.lblName = new System.Windows.Forms.Label();
-            this.lblAdress = new System.Windows.Forms.Label();
             this.lblPhone = new System.Windows.Forms.Label();
+            this.lblAdress = new System.Windows.Forms.Label();
+            this.lblStatus = new System.Windows.Forms.Label();
             this.btnAccept = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -78,20 +78,20 @@
             this.label4.ForeColor = System.Drawing.SystemColors.ControlText;
             this.label4.Location = new System.Drawing.Point(56, 163);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(36, 17);
+            this.label4.Size = new System.Drawing.Size(48, 17);
             this.label4.TabIndex = 3;
-            this.label4.Text = "SĐT";
+            this.label4.Text = "Status";
             // 
-            // lblName
+            // lblPhone
             // 
-            this.lblName.AutoSize = true;
-            this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblName.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.lblName.Location = new System.Drawing.Point(160, 55);
-            this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(97, 24);
-            this.lblName.TabIndex = 4;
-            this.lblName.Text = "[NameKH]";
+            this.lblPhone.AutoSize = true;
+            this.lblPhone.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPhone.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.lblPhone.Location = new System.Drawing.Point(160, 56);
+            this.lblPhone.Name = "lblPhone";
+            this.lblPhone.Size = new System.Drawing.Size(97, 24);
+            this.lblPhone.TabIndex = 4;
+            this.lblPhone.Text = "[NameKH]";
             // 
             // lblAdress
             // 
@@ -104,20 +104,20 @@
             this.lblAdress.TabIndex = 5;
             this.lblAdress.Text = "[Adress]";
             // 
-            // lblPhone
+            // lblStatus
             // 
-            this.lblPhone.AutoSize = true;
-            this.lblPhone.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhone.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblPhone.Location = new System.Drawing.Point(160, 160);
-            this.lblPhone.Name = "lblPhone";
-            this.lblPhone.Size = new System.Drawing.Size(63, 20);
-            this.lblPhone.TabIndex = 6;
-            this.lblPhone.Text = "[Phone]";
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStatus.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblStatus.Location = new System.Drawing.Point(160, 160);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(62, 20);
+            this.lblStatus.TabIndex = 6;
+            this.lblStatus.Text = "Waiting";
             // 
             // btnAccept
             // 
-            this.btnAccept.BackColor = System.Drawing.Color.Lime;
+            this.btnAccept.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnAccept.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAccept.ForeColor = System.Drawing.Color.White;
             this.btnAccept.Location = new System.Drawing.Point(69, 194);
@@ -126,6 +126,7 @@
             this.btnAccept.TabIndex = 7;
             this.btnAccept.Text = "Accept";
             this.btnAccept.UseVisualStyleBackColor = false;
+            this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
             // 
             // btnCancel
             // 
@@ -138,6 +139,7 @@
             this.btnCancel.TabIndex = 8;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // NotificationGuest
             // 
@@ -146,9 +148,9 @@
             this.ClientSize = new System.Drawing.Size(488, 258);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAccept);
-            this.Controls.Add(this.lblPhone);
+            this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.lblAdress);
-            this.Controls.Add(this.lblName);
+            this.Controls.Add(this.lblPhone);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -157,6 +159,7 @@
             this.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.Name = "NotificationGuest";
+            this.Load += new System.EventHandler(this.NotificationGuest_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -168,9 +171,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.Label lblAdress;
         private System.Windows.Forms.Label lblPhone;
+        private System.Windows.Forms.Label lblAdress;
+        private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Button btnAccept;
         private System.Windows.Forms.Button btnCancel;
     }
