@@ -43,5 +43,14 @@ namespace AppTaiXe.model
             get { return type; }
             set { type = value; }
         }
+
+        private String nvDvId;
+
+        public String NvDvId
+        {
+            get { return nvDvId; }
+            set { nvDvId = value; }
+        }
+
     }
 }

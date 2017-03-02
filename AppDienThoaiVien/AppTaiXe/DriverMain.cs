@@ -22,7 +22,7 @@ namespace AppTaiXe
         private ArrayList locations = new ArrayList();
         private User driver;
         private System.Timers.Timer timer; // set the time (5 min in this case)
-
+        private Socket socket = IO.Socket("http://localhost:8080/");
         internal User Driver
         {
             get { return driver; }
@@ -39,6 +39,7 @@ namespace AppTaiXe
         {
             lblName.Text = driver.Name;
             lblType.Text = "Loại xe " + driver.VehicleType;
+            lblStatus.Text = "Trạng thái: " + driver.Status;
             locations.Add(new Location(10.766525, 106.681965));
             locations.Add(new Location(10.762154, 106.682512));
             locations.Add(new Location(10.760623, 106.681377));
@@ -68,17 +69,25 @@ namespace AppTaiXe
 
         private void listenningSocketIo()
         {
-            var socket = IO.Socket("http://localhost:8080/");
-            socket.On(Socket.EVENT_MESSAGE, (data) =>
+            socket.On("DriverRequest", (data) =>
             {
-                User user = JsonConvert.DeserializeObject<User>(data as String);
+                Guest guest = JsonConvert.DeserializeObject<Guest>(data as String);
+                NotificationGuest notificationGuest = new NotificationGuest();
+                notificationGuest.DriverMain = this;
+                notificationGuest.Guest = guest;
+                notificationGuest.Show();
             });
+        }
 
-            socket.On(Socket.EVENT_CONNECT, (data) =>
-            {
-                User user = JsonConvert.DeserializeObject<User>(data as String);
-            });
+        private void accept()
+        {
+            //socket.Emit("DriverResponse")
+            socket.Emit("DriverResponse", JsonConvert.SerializeObject(new { abc = "abc" }));
+        }
 
+        private void cancel()
+        {
+            socket.Emit("DriverResponse", JsonConvert.SerializeObject(new { abc = "abc" }));
         }
 
         private void DriverMain_Close(object sender, EventArgs e)

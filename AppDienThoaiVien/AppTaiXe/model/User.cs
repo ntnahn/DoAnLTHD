@@ -45,6 +45,12 @@ namespace AppTaiXe.model
             set { vehicleType = value; }
         }
 
-        
+        private String status;
+
+        public String Status
+        {
+            get { return status; }
+            set { status = value; }
+        }
     }
 }
