@@ -34,6 +34,7 @@ module.exports = function () {
                 id: 'user0kv4q01ck7453ualdnd01',
                 "name" : "TVT1",
                 "password" : "12345",
+                "status" : "ready",
                 "vehicletype" : "normal",
                 "location" : {
                     "lat" : 10.767647398680138,
@@ -44,6 +45,7 @@ module.exports = function () {
                 id: 'user1kv4q01ck7453ualdnd01',
                 "name" : "TVT2",
                 "password" : "12345",
+                "status" : "ready",
                 "vehicletype" : "premium",
                 "location" : {
                     "lat" : 10.759173173901845,
@@ -54,6 +56,7 @@ module.exports = function () {
                 id: 'user2kv4q01ck7453ualdnd01',
                 "name" : "TVT3",
                 "password" : "12345",
+                "status" : "ready",
                 "vehicletype" : "normal",
                 "location" : {
                     "lat" : 10.75740241027677,
@@ -64,6 +67,7 @@ module.exports = function () {
                 id: 'user3kv4q01ck7453ualdnd01',
                 "name" : "TVT4",
                 "password" : "12345",
+                "status" : "ready",
                 "vehicletype" : "premium",
                 "location" : {
                     "lat" : 10.763347075583702,
@@ -74,6 +78,7 @@ module.exports = function () {
                 id: 'user4kv4q01ck7453ualdnd01',
                 "name" : "TVT5",
                 "password" : "12345",
+                "status" : "ready",
                 "vehicletype" : "normal",
                 "location" : {
                     "lat" : 10.766525,
@@ -84,6 +89,7 @@ module.exports = function () {
                 id: 'user5kv4q01ck7453ualdnd01',
                 "name" : "TVT6",
                 "password" : "12345",
+                "status" : "ready",
                 "vehicletype" : "normal",
                 "location" : {
                     "lat" : 10.762154,
@@ -94,6 +100,7 @@ module.exports = function () {
                 id: 'user6kv4q01ck7453ualdnd01',
                 "name" : "TVT7",
                 "password" : "12345",
+                "status" : "ready",
                 "vehicletype" : "normal",
                 "location" : {
                     "lat" : 10.760623,
@@ -104,6 +111,7 @@ module.exports = function () {
                 id: 'user7kv4q01ck7453ualdnd01',
                 "name" : "TVT8",
                 "password" : "12345",
+                "status" : "ready",
                 "vehicletype" : "premium",
                 "location" : {
                     "lat" : 10.763693,
@@ -114,6 +122,7 @@ module.exports = function () {
                 id: 'user8kv4q01ck7453ualdnd01',
                 "name" : "TVT9",
                 "password" : "12345",
+                "status" : "ready",
                 "vehicletype" : "normal",
                 "location" : {
                     "lat" : 10.759772,
@@ -124,6 +133,7 @@ module.exports = function () {
                 id: 'user9kv4q01ck7453ualdnd01',
                 "name" : "TVT20",
                 "password" : "12345",
+                "status" : "ready",
                 "vehicletype" : "premium",
                 "location" : {
                     "lat" : 10.765907,
@@ -134,6 +144,7 @@ module.exports = function () {
                 id: 'user3kv4q01ck7453ualdnd02',
                 "name" : "NTN1",
                 "password" : "12345",
+                "status" : "ready",
                 "vehicletype" : "premium",
                 "location" : {
                     "lat" : 10.769153,
@@ -144,6 +155,7 @@ module.exports = function () {
                 id: 'user3kv4q01ck7453ualdnd03',
                 "name" : "NTN2",
                 "password" : "12345",
+                "status" : "ready",
                 "vehicletype" : "normal",
                 "location" : {
                     "lat" : 10.766602,
@@ -154,6 +166,7 @@ module.exports = function () {
                 id: 'user3kv4q01ck7453ualdnd04',
                 "name" : "NTN3",
                 "password" : "12345",
+                "status" : "ready",
                 "vehicletype" : "normal",
                 "location" : {
                     "lat" : 10.767656,
@@ -164,6 +177,7 @@ module.exports = function () {
                 id: 'user3kv4q01ck7453ualdnd05',
                 "name" : "NTN4",
                 "password" : "12345",
+                "status" : "ready",
                 "vehicletype" : "premium",
                 "location" : {
                     "lat" : 10.770439,
@@ -174,6 +188,7 @@ module.exports = function () {
                 id: 'user3kv4q01ck7453ualdnd06',
                 "name" : "NTN5",
                 "password" : "12345",
+                "status" : "ready",
                 "vehicletype" : "premium",
                 "location" : {
                     "lat" : 10.770165,
@@ -184,6 +199,7 @@ module.exports = function () {
                 id: 'user3kv4q01ck7453ualdnd07',
                 "name" : "NTN6",
                 "password" : "12345",
+                "status" : "ready",
                 "vehicletype" : "normal",
                 "location" : {
                     "lat" : 10.766349,
@@ -194,6 +210,7 @@ module.exports = function () {
                 id: 'user3kv4q01ck7453ualdnd08',
                 "name" : "NTN7",
                 "password" : "12345",
+                "status" : "ready",
                 "vehicletype" : "normal",
                 "location" : {
                     "lat" : 10.766012,
@@ -204,6 +221,7 @@ module.exports = function () {
                 id: 'user3kv4q01ck7453ualdnd09',
                 "name" : "NTN8",
                 "password" : "12345",
+                "status" : "ready",
                 "vehicletype" : "normal",
                 "location" : {
                     "lat" : 10.758718,

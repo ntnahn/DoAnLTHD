@@ -48,12 +48,16 @@ namespace AppTaiXe
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-
+            if (driverMain != null)
+                driverMain.accept();
+            this.Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-
+            if (driverMain != null)
+                driverMain.cancel();
+            this.Close();
         }
     }
 }

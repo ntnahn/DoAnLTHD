@@ -23,6 +23,7 @@ namespace AppTaiXe
         private User driver;
         private System.Timers.Timer timer; // set the time (5 min in this case)
         private Socket socket = IO.Socket("http://localhost:8080/");
+        private Guest guest;
         internal User Driver
         {
             get { return driver; }
@@ -71,7 +72,7 @@ namespace AppTaiXe
         {
             socket.On("DriverRequest", (data) =>
             {
-                Guest guest = JsonConvert.DeserializeObject<Guest>(data as String);
+                guest = JsonConvert.DeserializeObject<Guest>(data as String);
                 NotificationGuest notificationGuest = new NotificationGuest();
                 notificationGuest.DriverMain = this;
                 notificationGuest.Guest = guest;
@@ -79,15 +80,15 @@ namespace AppTaiXe
             });
         }
 
-        private void accept()
+        public void accept()
         {
             //socket.Emit("DriverResponse")
-            socket.Emit("DriverResponse", JsonConvert.SerializeObject(new { abc = "abc" }));
+            socket.Emit("DriverResponse", JsonConvert.SerializeObject(new { NvDvId = guest.NvDvId, response = true }));
         }
 
-        private void cancel()
+        public void cancel()
         {
-            socket.Emit("DriverResponse", JsonConvert.SerializeObject(new { abc = "abc" }));
+            socket.Emit("DriverResponse", JsonConvert.SerializeObject(new { NvDvId = guest.NvDvId, response = false }));
         }
 
         private void DriverMain_Close(object sender, EventArgs e)
