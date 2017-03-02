@@ -22,7 +22,7 @@ namespace AppTaiXe
         private ArrayList locations = new ArrayList();
         private User driver;
         private System.Timers.Timer timer; // set the time (5 min in this case)
-
+        var socket = IO.Socket("http://localhost:8080/");
         internal User Driver
         {
             get { return driver; }
@@ -68,16 +68,23 @@ namespace AppTaiXe
 
         private void listenningSocketIo()
         {
-            var socket = IO.Socket("http://localhost:8080/");
             socket.On("DriverRequest", (data) =>
             {
                 Guest guest = JsonConvert.DeserializeObject<Guest>(data as String);
+                NotificationGuest notificationGuest = new NotificationGuest();
+                notificationGuest.DriverMain = this;
+                notificationGuest.Guest = guest;
+                notificationGuest.Show();
             });
+        }
 
-            //socket.On(Socket.EVENT_CONNECT, (data) =>
-            //{
-            //    User user = JsonConvert.DeserializeObject<User>(data as String);
-            //});
+        private void accept()
+        {
+            //socket.Emit("DriverResponse")
+        }
+
+        private void cancel()
+        {
 
         }
 

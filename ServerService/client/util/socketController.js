@@ -13,7 +13,7 @@ export default class ChatSocket {
   connectToServer() {
     if(this.connected === false){
       console.log('Emit connectToServer');
-      this.socket.emit('clientConnect', {id: this.id});
+      this.socket.emit('clientConnect', this.id);
       this.connected = true;
     }
   }
@@ -31,7 +31,6 @@ export default class ChatSocket {
   }
   emitDriverRequest(data) {
     data.NvDvId = this.id;
-
     this.socket.emit('DriverRequest', data);
   }
 }

@@ -13,6 +13,7 @@ export default class App extends Component {
 
     this.loadClient = this.loadClient.bind(this);
     this.handleSendRequest = this.handleSendRequest.bind(this);
+    this.handleSetUser = this.handleSetUser.bind(this);
   }
 
   loadClient() {
@@ -22,10 +23,19 @@ export default class App extends Component {
     });
   }
   handleSendRequest() {
-    // Disable to can not click after process finished
-    this.buttonSendRequest.disabled = 'true';
-    this.chatSocket.emitDriverRequest({
-    });
+    if(this.driver) {
+      // Disable to can not click after process finished
+      // Waiting for response of "Tài xế"
+      this.buttonSendRequest.disabled = 'true';
+      this.chatSocket.emitDriverRequest({
+        user: this.driver,
+        client: this.state.clientInfo
+      });
+    }
+  }
+  handleSetUser(user) {
+    console.log('App set user select', user);
+    this.driver = user;
   }
   render() {
     let address = this.state.clientInfo?this.state.clientInfo.address:'';
@@ -39,7 +49,9 @@ export default class App extends Component {
         </div>
         <div className="content">
           <div className="content-left">
-            <Map address={address} clientInfo={this.state.clientInfo}/>
+            <Map address={address} clientInfo={this.state.clientInfo}
+                 handleSetUser={this.handleSetUser}
+            />
           </div>
           <div className="content-right">
             <button onClick={this.loadClient} type="button" className="button btn-nap-diem">Nạp điểm</button>
@@ -67,5 +79,9 @@ export default class App extends Component {
   }
   componentDidMount() {
     this.chatSocket = new ChatSocket();
+
+    this.chatSocket.listenDriverResponse((data)=>{
+      console.log('listenDriverResponse:', data);
+    })
   }
 }

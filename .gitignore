@@ -3,3 +3,7 @@ ServerService/.idea/
 ServerService/npm-debug.log
 ServerService/*.log.*
 ServerService/.vscode/
+AppDienThoaiVien/AppDienThoaiVien/bin/
+AppDienThoaiVien/AppDienThoaiVien/obj/
+AppDienThoaiVien/AppTaiXe/bin/
+AppDienThoaiVien/AppTaiXe/obj/

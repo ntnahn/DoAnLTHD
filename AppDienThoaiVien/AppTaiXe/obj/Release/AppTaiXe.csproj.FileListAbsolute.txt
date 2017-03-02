@@ -1,4 +1,0 @@
-D:\HOAN_CHINH\HKIII\1.LTHD\DoAnLTHD\AppDienThoaiVien\AppTaiXe\bin\Release\Newtonsoft.Json.dll
-D:\HOAN_CHINH\HKIII\1.LTHD\DoAnLTHD\AppDienThoaiVien\AppTaiXe\bin\Release\AppTaiXe.exe.config
-D:\HOAN_CHINH\HKIII\1.LTHD\DoAnLTHD\AppDienThoaiVien\AppTaiXe\obj\Release\Interop.WinHttp.dll
-D:\HOAN_CHINH\HKIII\1.LTHD\DoAnLTHD\AppDienThoaiVien\AppTaiXe\obj\Release\AppTaiXe.csproj.ResolveComReference.cache

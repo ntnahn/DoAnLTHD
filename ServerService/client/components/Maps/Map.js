@@ -164,12 +164,14 @@ export default class Map extends Component {
       icon:'images/bike_location_icon40x40.png'
     });
     marker.driver = driver;
-    marker.addListener('click', ()=>{
-      console.log('Driver marker click', marker);
+    marker.addListener('click',()=>{
+      // console.log('Driver marker click', marker);
       // todo: Lấy thông tin của marker(tài khoản của tài xế)
       // Sau khi chọn tài xế, nhấn nút gửi yêu cầu để
       // => Send the socket request to App tài xế
-      // infowindow.open(map, marker);
+      this.props.handleSetUser(marker.driver);
+      this.resetDriverMarkerIcon();
+      marker.setIcon('images/bike_location_icon_selected40x40.png');
     });
     this.driverMarkers.push(marker);
   }
@@ -204,13 +206,16 @@ export default class Map extends Component {
     this.clearDriverMarkers();
     this.driverMarkers = [];
   }
+
+  // Reset all driver marker
+  resetDriverMarkerIcon() {
+    this.driverMarkers.map((marker)=>{
+      marker.setIcon('images/bike_location_icon40x40.png');
+    });
+  }
 }
 Map.propTypes = {
+  handleSetUser: PropTypes.func.isRequired,
   address: PropTypes.string,
   clientInfo: PropTypes.object
 };
-
-/**
- * Random location in HCMC
- *
- **/
