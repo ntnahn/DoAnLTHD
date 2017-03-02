@@ -12,7 +12,7 @@ namespace AppTaiXe {
         static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new NotificationGuest());
+            Application.Run(new Form1());
         }
     }
 }
