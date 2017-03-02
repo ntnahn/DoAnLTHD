@@ -13,3 +13,5 @@ D:\HOAN_CHINH\HKIII\1.LTHD\DoAnLTHD\AppDienThoaiVien\AppTaiXe\obj\Release\AppTai
 D:\HOAN_CHINH\HKIII\1.LTHD\DoAnLTHD\AppDienThoaiVien\AppTaiXe\obj\Release\AppTaiXe.csproj.GenerateResource.Cache
 D:\HOAN_CHINH\HKIII\1.LTHD\DoAnLTHD\AppDienThoaiVien\AppTaiXe\obj\Release\AppTaiXe.exe
 D:\HOAN_CHINH\HKIII\1.LTHD\DoAnLTHD\AppDienThoaiVien\AppTaiXe\obj\Release\AppTaiXe.pdb
+D:\HOAN_CHINH\HKIII\1.LTHD\DoAnLTHD\AppDienThoaiVien\AppTaiXe\obj\Release\AppTaiXe.csprojResolveAssemblyReference.cache
+D:\HOAN_CHINH\HKIII\1.LTHD\DoAnLTHD\AppDienThoaiVien\AppTaiXe\obj\Release\AppTaiXe.DriverMain.resources

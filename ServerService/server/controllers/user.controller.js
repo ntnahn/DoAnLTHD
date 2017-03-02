@@ -11,7 +11,7 @@ exports.checkUser = function(req, res)
 	      res.status(500).send(err);
 	    }
 	    if (user) {
-	    	res.json(user.id);
+	    	res.json(user);
 	    } else {
 	    	res.json(null);
 	    }
@@ -33,6 +33,20 @@ exports.getUser = function (req, res) {
     });
 };
 
-exports.updateUser = function (req, res) {
-
+exports.updateLocationUser = function (req, res) {
+	let location = req.body.location;
+	let  idUser = req.params.userId;
+    User.findOne({id: idUser}).exec((err, user) => {
+        if (err) {
+            res.status(500).send(err);
+        }
+        user.location.lat = location.lat;
+        user.location.lng = location.lng;
+        user.save(function (err) {
+			if(err)
+				res.send(err);
+			else
+				res.json(user);
+        });
+    });
 }

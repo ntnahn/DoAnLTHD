@@ -15,12 +15,18 @@ namespace AppTaiXe.model
             get { return lat; }
             set { lat = value; }
         }
-        private Double longs;
+        private Double lng;
 
-        public Double Longs
+        public Double Lng
         {
-            get { return longs; }
-            set { longs = value; }
+            get { return lng; }
+            set { lng = value; }
+        }
+
+        public Location(double lat, double lng)
+        {
+            Lat = lat;
+            Lng = lng;
         }
 
     }

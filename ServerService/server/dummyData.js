@@ -33,7 +33,7 @@ module.exports = function () {
                 id: 'pointkv4q01ck7453ualdnd01',
                 name: 'TranVanTrai',
                 password: '12345',
-                location: {lat: 10.772546, long: 106.678567},
+                location: {lat: 10.772546, lng: 106.678567},
                 vehicletype: 'normal'
             })
         ];
