@@ -163,6 +163,9 @@ export default class Map extends Component {
       map: this.map,
       icon:'images/bike_location_icon40x40.png'
     });
+    let infoWindow = new google.maps.InfoWindow;
+    infoWindow.setContent(driver.name);
+    infoWindow.open(this.map, marker);
     marker.driver = driver;
     marker.addListener('click',()=>{
       // console.log('Driver marker click', marker);

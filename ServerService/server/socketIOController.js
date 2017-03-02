@@ -36,8 +36,16 @@ module.exports = class socketIOController {
         // có thể chỉ load lên map các tài xế online
         console.log('DriverRequest:', data);
         let userID = data.user.id; // Mã của tài xế
+        let client = data.client;
+        let dataTransfer = {
+          id: client.id,
+          phone: client.phone,
+          status: client.status,
+          type: client.type,
+          NvDvId: data.NvDvId
+        };
         if(socketIDs[userID]) {
-          io.to(socketIDs[userID]).emit('DriverRequest', data);
+          io.to(socketIDs[userID]).emit('DriverRequest', dataTransfer);
         }
       });
 
