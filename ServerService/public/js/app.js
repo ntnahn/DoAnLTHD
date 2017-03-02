@@ -430,6 +430,9 @@ var Map = (function (_Component) {
         map: this.map,
         icon: 'images/bike_location_icon40x40.png'
       });
+      var infoWindow = new google.maps.InfoWindow();
+      infoWindow.setContent(driver.name);
+      infoWindow.open(this.map, marker);
       marker.driver = driver;
       marker.addListener('click', function () {
         // console.log('Driver marker click', marker);
