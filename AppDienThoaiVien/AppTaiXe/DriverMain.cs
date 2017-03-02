@@ -69,15 +69,15 @@ namespace AppTaiXe
         private void listenningSocketIo()
         {
             var socket = IO.Socket("http://localhost:8080/");
-            socket.On(Socket.EVENT_MESSAGE, (data) =>
+            socket.On("DriverRequest", (data) =>
             {
-                User user = JsonConvert.DeserializeObject<User>(data as String);
+                Guest guest = JsonConvert.DeserializeObject<Guest>(data as String);
             });
 
-            socket.On(Socket.EVENT_CONNECT, (data) =>
-            {
-                User user = JsonConvert.DeserializeObject<User>(data as String);
-            });
+            //socket.On(Socket.EVENT_CONNECT, (data) =>
+            //{
+            //    User user = JsonConvert.DeserializeObject<User>(data as String);
+            //});
 
         }
 

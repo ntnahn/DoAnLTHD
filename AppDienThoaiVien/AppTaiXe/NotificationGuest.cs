@@ -15,6 +15,13 @@ namespace AppTaiXe
     public partial class NotificationGuest : Form
     {
         private Guest guest;
+        private DriverMain driverMain;
+
+        public DriverMain DriverMain
+        {
+            get { return driverMain; }
+            set { driverMain = value; }
+        }
 
         internal Guest Guest
         {
