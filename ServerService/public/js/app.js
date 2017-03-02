@@ -84,6 +84,9 @@ var App = (function (_Component) {
           user: this.driver,
           client: this.state.clientInfo
         });
+        this.setState({ requesting: true });
+      } else {
+        alert('Vui lòng chọn xe');
       }
     }
   }, {
@@ -179,10 +182,13 @@ var App = (function (_Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
+      var _this3 = this;
+
       this.chatSocket = new _utilSocketController2['default']();
 
       this.chatSocket.listenDriverResponse(function (data) {
         console.log('listenDriverResponse:', data);
+        _this3.setState({ requesting: false });
       });
     }
   }]);

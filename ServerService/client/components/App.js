@@ -31,6 +31,9 @@ export default class App extends Component {
         user: this.driver,
         client: this.state.clientInfo
       });
+      this.setState({requesting: true});
+    } else {
+      alert('Vui lòng chọn xe');
     }
   }
   handleSetUser(user) {
@@ -82,6 +85,7 @@ export default class App extends Component {
 
     this.chatSocket.listenDriverResponse((data)=>{
       console.log('listenDriverResponse:', data);
+      this.setState({requesting: false});
     })
   }
 }
