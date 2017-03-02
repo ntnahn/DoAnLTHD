@@ -67,6 +67,8 @@ namespace AppTaiXe
         private void DriverMain_Close(object sender, EventArgs e)
         {
             timer.Stop();
+            timer.Dispose();
+            Environment.Exit(0);
         }
 
         private void OnTimedEvent(object source, ElapsedEventArgs e)
@@ -117,6 +119,11 @@ namespace AppTaiXe
                 }
                 return null;
             }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

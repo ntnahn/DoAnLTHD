@@ -24,6 +24,17 @@ namespace AppTaiXe
             //});
         }
 
+        void Form1_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            MessageBox.Show("Key Down");
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnDangNhap.PerformClick();
+            }
+            throw new System.NotImplementedException();
+        }
+
+
         private void btnDangNhap_Click(object sender, EventArgs e)
         {
             if (checkInfoLogin())
@@ -45,6 +56,7 @@ namespace AppTaiXe
                         User driver = response.Content.ReadAsAsync<User>().Result;
                         if (driver != null)
                         {
+                            lblError.Text = "";
                             DriverMain DriverMain = new DriverMain();
                             DriverMain.Driver = driver;
                             this.Hide();
@@ -54,7 +66,7 @@ namespace AppTaiXe
                         }
                         else
                         {
-                            MessageBox.Show("Please check username or password, not correctly!!");
+                            lblError.Text = "Please check username or password, not correctly!!";
                         }
                     }
                 }
@@ -67,16 +79,26 @@ namespace AppTaiXe
             String name = txtName.Text.Trim();
             if (String.IsNullOrEmpty(name))
             {
-                MessageBox.Show("Please insert name");
+                lblError.Text = "Please insert name";
                 return false;
             }
             String pass = txtPass.Text.Trim();
             if (String.IsNullOrEmpty(pass))
             {
-                MessageBox.Show("Please insert password");
+                lblError.Text = "Please insert password";
                 return false;
             }
             return true;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            lblError.Text = "";
+        }
+
+        private void btnDangNhap_Keypress(object sender, KeyPressEventArgs e)
+        {
+
         }
     }
 }
