@@ -37,6 +37,26 @@ exports.updateClientByPhone = function (req, res) {
   );
 };
 
+/**
+ * {client: {
+ *    id: 'afwefawefwefwgwe',
+ *    status: 'waiting' || 'inprogress' || 'finished'
+ * }}
+ * @param req
+ * @param res
+ */
+exports.updateClientStatus = function (req, res) {
+  let client = req.body.client;
+  Client.update({id: client.id}, {status: client.status},
+    function (err, numberAffected, rawResponse) {
+      if (err) {
+        res.status(500).send(err);
+      }
+      res.json({result: true});
+    }
+  );
+};
+
 
 
 // Thêm khách hàng mới

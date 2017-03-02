@@ -8,6 +8,6 @@ const userSchema = new Schema({
         lat: {type: Number, require: true},
         lng: {type: Number, require: true}
     },
-    vehicletype: {type: String}
+    vehicletype: {type: String} // normal || premium
 });
 module.exports = mongoose.model('User', userSchema);

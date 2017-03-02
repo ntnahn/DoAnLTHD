@@ -31,20 +31,53 @@ module.exports = function () {
         }
         const users = [
             new User({
-                id: 'pointkv4q01ck7453ualdnd01',
-                name: 'TranVanTrai',
-                password: '12345',
-                location: {lat: 10.772546, lng: 106.678567},
-                vehicletype: 'normal'
+                id: 'user0kv4q01ck7453ualdnd01',
+                "name" : "TranVanTrai",
+                "password" : "12345",
+                "vehicletype" : "normal",
+                "location" : {
+                    "lat" : 10.767647398680138,
+                    "lng" : 106.67454242706299
+                }
+            }),
+            new User({
+                id: 'user1kv4q01ck7453ualdnd01',
+                "name" : "Nguyễn Thanh Nhàn",
+                "password" : "12345",
+                "vehicletype" : "premium",
+                "location" : {
+                    "lat" : 10.759173173901845,
+                    "lng" : 106.67752504348755
+                }
+            }),
+            new User({
+                id: 'user2kv4q01ck7453ualdnd01',
+                "name" : "Nguyễn Văn A",
+                "password" : "12345",
+                "vehicletype" : "normal",
+                "location" : {
+                    "lat" : 10.75740241027677,
+                    "lng" : 106.66718244552612
+                }
+            }),
+            new User({
+                id: 'user3kv4q01ck7453ualdnd01',
+                "name" : "Nguyễn Thị B",
+                "password" : "12345",
+                "vehicletype" : "premium",
+                "location" : {
+                    "lat" : 10.763347075583702,
+                    "lng" : 106.6592001914978
+                }
             })
         ];
 
         User.create(users, (error) => {
             if (error) {
-                console.log('Insert User failed!');
+                console.log('Insert Users failed!');
                 console.log(error);
             } else {
-                console.log('Insert User success!');
+                console.log('Insert Users success!');
             }
         });
     });

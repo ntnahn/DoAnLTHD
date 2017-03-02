@@ -158,3 +158,12 @@ input[type="text"]:active {
     border: 1px solid #ffffff;
     margin: 0 5px;
 }
+.btn-send-request {
+    bottom: 5px;
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%);
+}
+.btn-disable {
+    background: darkslategrey;
+}
