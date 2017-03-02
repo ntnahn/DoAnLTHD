@@ -40,10 +40,10 @@ namespace AppTaiXe
                 lblPhone.Text = guest.Phone;
                 lblAdress.Text = guest.Address;
             }
-            else
-            {
-                MessageBox.Show("Khách Hàng NULL");
-            }
+            //else
+            //{
+            //    MessageBox.Show("Khách Hàng NULL");
+            //}
         }
 
         private void btnAccept_Click(object sender, EventArgs e)
