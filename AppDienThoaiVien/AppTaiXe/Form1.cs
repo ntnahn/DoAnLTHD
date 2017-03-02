@@ -1,4 +1,6 @@
 ﻿using AppTaiXe.model;
+using Newtonsoft.Json;
+using Quobject.SocketIoClientDotNet.Client;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,13 +17,11 @@ namespace AppTaiXe
 {
     public partial class Form1 : Form
     {
+        private Socket socket;
+        private User user = null;
         public Form1()
         {
             InitializeComponent();
-            //var socket = IO.Socket("http://localhost:8080/");
-            //socket.On(Socket.EVENT_CONNECT, () => {
-
-            //});
         }
 
         private void btnDangNhap_Click(object sender, EventArgs e)
@@ -47,10 +47,10 @@ namespace AppTaiXe
                         {
                             DriverMain DriverMain = new DriverMain();
                             DriverMain.Driver = driver;
-                            this.Hide();
-                            DriverMain.Show();
-                           
-                          
+                            this.user = driver;
+                            this.doConnectToSocket(driver.Id);
+                            //this.Hide();
+                            //DriverMain.Show();                          
                         }
                         else
                         {
@@ -77,6 +77,21 @@ namespace AppTaiXe
                 return false;
             }
             return true;
+        }
+
+        private void doConnectToSocket(String userID) {
+            // Connect to socket
+            var socket = IO.Socket("http://localhost:8080/");
+            socket.On(Socket.EVENT_CONNECT, () => {
+                // Emit connect to socket server
+                socket.Emit("clientConnect", userID);
+            });
+            // When have client request
+            socket.On("DriverRequest", (data) => {
+                MessageBox.Show("Socket on DriverRequest:");
+            });
+            socket.Emit("DriverResponse", JsonConvert.SerializeObject(new{abc = "abc"}));
+            this.socket = socket;
         }
     }
 }

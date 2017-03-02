@@ -60,6 +60,7 @@ var App = (function (_Component) {
 
     this.loadClient = this.loadClient.bind(this);
     this.handleSendRequest = this.handleSendRequest.bind(this);
+    this.handleSetUser = this.handleSetUser.bind(this);
   }
 
   _createClass(App, [{
@@ -75,9 +76,21 @@ var App = (function (_Component) {
   }, {
     key: 'handleSendRequest',
     value: function handleSendRequest() {
-      // Disable to can not click after process finished
-      this.buttonSendRequest.disabled = 'true';
-      this.chatSocket.emitDriverRequest({});
+      if (this.driver) {
+        // Disable to can not click after process finished
+        // Waiting for response of "Tài xế"
+        this.buttonSendRequest.disabled = 'true';
+        this.chatSocket.emitDriverRequest({
+          user: this.driver,
+          client: this.state.clientInfo
+        });
+      }
+    }
+  }, {
+    key: 'handleSetUser',
+    value: function handleSetUser(user) {
+      console.log('App set user select', user);
+      this.driver = user;
     }
   }, {
     key: 'render',
@@ -108,7 +121,9 @@ var App = (function (_Component) {
           _react2['default'].createElement(
             'div',
             { className: 'content-left' },
-            _react2['default'].createElement(_MapsMap2['default'], { address: address, clientInfo: this.state.clientInfo })
+            _react2['default'].createElement(_MapsMap2['default'], { address: address, clientInfo: this.state.clientInfo,
+              handleSetUser: this.handleSetUser
+            })
           ),
           _react2['default'].createElement(
             'div',
@@ -165,6 +180,10 @@ var App = (function (_Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.chatSocket = new _utilSocketController2['default']();
+
+      this.chatSocket.listenDriverResponse(function (data) {
+        console.log('listenDriverResponse:', data);
+      });
     }
   }]);
 
@@ -398,6 +417,8 @@ var Map = (function (_Component) {
   }, {
     key: 'addDriverMarker',
     value: function addDriverMarker(driver) {
+      var _this7 = this;
+
       var marker = new google.maps.Marker({
         position: driver.location,
         map: this.map,
@@ -405,11 +426,13 @@ var Map = (function (_Component) {
       });
       marker.driver = driver;
       marker.addListener('click', function () {
-        console.log('Driver marker click', marker);
+        // console.log('Driver marker click', marker);
         // todo: Lấy thông tin của marker(tài khoản của tài xế)
         // Sau khi chọn tài xế, nhấn nút gửi yêu cầu để
         // => Send the socket request to App tài xế
-        // infowindow.open(map, marker);
+        _this7.props.handleSetUser(marker.driver);
+        _this7.resetDriverMarkerIcon();
+        marker.setIcon('images/bike_location_icon_selected40x40.png');
       });
       this.driverMarkers.push(marker);
     }
@@ -418,11 +441,11 @@ var Map = (function (_Component) {
   }, {
     key: 'loadDriverMarkers',
     value: function loadDriverMarkers() {
-      var _this7 = this;
+      var _this8 = this;
 
       console.log('this.drivers:', this.drivers);
       this.drivers.map(function (driver) {
-        _this7.addDriverMarker(driver);
+        _this8.addDriverMarker(driver);
       });
     }
 
@@ -456,6 +479,15 @@ var Map = (function (_Component) {
       this.clearDriverMarkers();
       this.driverMarkers = [];
     }
+
+    // Reset all driver marker
+  }, {
+    key: 'resetDriverMarkerIcon',
+    value: function resetDriverMarkerIcon() {
+      this.driverMarkers.map(function (marker) {
+        marker.setIcon('images/bike_location_icon40x40.png');
+      });
+    }
   }]);
 
   return Map;
@@ -464,14 +496,10 @@ var Map = (function (_Component) {
 exports['default'] = Map;
 
 Map.propTypes = {
+  handleSetUser: _react.PropTypes.func.isRequired,
   address: _react.PropTypes.string,
   clientInfo: _react.PropTypes.object
 };
-
-/**
- * Random location in HCMC
- *
- **/
 module.exports = exports['default'];
 
 },{"../../util/apiCaller":4,"react":207}],4:[function(require,module,exports){
@@ -552,7 +580,7 @@ var ChatSocket = (function () {
     value: function connectToServer() {
       if (this.connected === false) {
         console.log('Emit connectToServer');
-        this.socket.emit('clientConnect', { id: this.id });
+        this.socket.emit('clientConnect', this.id);
         this.connected = true;
       }
     }
@@ -576,7 +604,6 @@ var ChatSocket = (function () {
     key: 'emitDriverRequest',
     value: function emitDriverRequest(data) {
       data.NvDvId = this.id;
-
       this.socket.emit('DriverRequest', data);
     }
   }]);

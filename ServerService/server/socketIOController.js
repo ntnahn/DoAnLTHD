@@ -14,12 +14,8 @@ module.exports = class socketIOController {
     // Using Socket.io Communication
     io.sockets.on('connection', (socket) => {
       console.log('Have new connection');
-      socket.on('sayhello', (message) => {
-        console.log('Client sayhello: ', message);
-      });
-      socket.on('clientConnect', (user) => {
-        console.log('Client connect, user: ', user);
-        let userID = user.id;
+      socket.on('clientConnect', (userID) => {
+        console.log('Client connect, userID: ', userID);
         socketIDs[userID] = socket.id;
         socket.userID = userID;
       });
@@ -30,7 +26,7 @@ module.exports = class socketIOController {
         // Và id của Nhân viên định vị
         /**
          * data: {
-         *    NvDvId: 'ergwegwfwegwe', // Id của Nhân viên định vị
+         *    NvDvId: 'ergwegwfwegwe', // Id của Nhân viên định vị, để sau này bên app tài xế gửi kết quả về
          *    user: {...}, // tài xế
          *    client: {...} // khách đi xe
          * }
@@ -40,8 +36,8 @@ module.exports = class socketIOController {
         // có thể chỉ load lên map các tài xế online
         console.log('DriverRequest:', data);
         let userID = data.user.id; // Mã của tài xế
-        if(socketIDs[NvDvId]) {
-          io.to(socketIDs[NvDvId]).emit('DriverRequest', data);
+        if(socketIDs[userID]) {
+          io.to(socketIDs[userID]).emit('DriverRequest', data);
         }
       });
 
