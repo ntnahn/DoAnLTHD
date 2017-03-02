@@ -22,9 +22,6 @@ namespace AppTaiXe
         public Form1()
         {
             InitializeComponent();
-<<<<<<< HEAD
-=======
-            
         }
 
         void Form1_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
@@ -35,7 +32,6 @@ namespace AppTaiXe
                 btnDangNhap.PerformClick();
             }
             throw new System.NotImplementedException();
->>>>>>> 90edf4c0efa41c76e21ecdc28b24fc1fa69c0404
         }
 
 
@@ -64,9 +60,9 @@ namespace AppTaiXe
                             DriverMain DriverMain = new DriverMain();
                             DriverMain.Driver = driver;
                             this.user = driver;
-                            this.doConnectToSocket(driver.Id);
-                            //this.Hide();
-                            //DriverMain.Show();                          
+                            //this.doConnectToSocket(driver.Id);
+                            this.Hide();
+                            DriverMain.Show();
                         }
                         else
                         {
@@ -95,21 +91,23 @@ namespace AppTaiXe
             return true;
         }
 
-<<<<<<< HEAD
-        private void doConnectToSocket(String userID) {
+        private void doConnectToSocket(String userID)
+        {
             // Connect to socket
             var socket = IO.Socket("http://localhost:8080/");
-            socket.On(Socket.EVENT_CONNECT, () => {
+            socket.On(Socket.EVENT_CONNECT, () =>
+            {
                 // Emit connect to socket server
                 socket.Emit("clientConnect", userID);
             });
             // When have client request
-            socket.On("DriverRequest", (data) => {
+            socket.On("DriverRequest", (data) =>
+            {
                 MessageBox.Show("Socket on DriverRequest:");
             });
-            socket.Emit("DriverResponse", JsonConvert.SerializeObject(new{abc = "abc"}));
+            socket.Emit("DriverResponse", JsonConvert.SerializeObject(new { abc = "abc" }));
             this.socket = socket;
-=======
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
             lblError.Text = "";
@@ -118,7 +116,6 @@ namespace AppTaiXe
         private void btnDangNhap_Keypress(object sender, KeyPressEventArgs e)
         {
 
->>>>>>> 90edf4c0efa41c76e21ecdc28b24fc1fa69c0404
         }
     }
 }

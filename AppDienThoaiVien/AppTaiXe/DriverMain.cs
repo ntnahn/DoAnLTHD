@@ -22,7 +22,7 @@ namespace AppTaiXe
         private ArrayList locations = new ArrayList();
         private User driver;
         private System.Timers.Timer timer; // set the time (5 min in this case)
-        var socket = IO.Socket("http://localhost:8080/");
+        private Socket socket = IO.Socket("http://localhost:8080/");
         internal User Driver
         {
             get { return driver; }
@@ -39,6 +39,7 @@ namespace AppTaiXe
         {
             lblName.Text = driver.Name;
             lblType.Text = "Loại xe " + driver.VehicleType;
+            lblStatus.Text = "Trạng thái: " + driver.Status;
             locations.Add(new Location(10.766525, 106.681965));
             locations.Add(new Location(10.762154, 106.682512));
             locations.Add(new Location(10.760623, 106.681377));
@@ -81,11 +82,12 @@ namespace AppTaiXe
         private void accept()
         {
             //socket.Emit("DriverResponse")
+            socket.Emit("DriverResponse", JsonConvert.SerializeObject(new { abc = "abc" }));
         }
 
         private void cancel()
         {
-
+            socket.Emit("DriverResponse", JsonConvert.SerializeObject(new { abc = "abc" }));
         }
 
         private void DriverMain_Close(object sender, EventArgs e)
