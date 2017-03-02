@@ -63,7 +63,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Point.cs" />
+    <Compile Include="Client.cs" />
     <EmbeddedResource Include="FormDienThoaiVien.resx">
       <DependentUpon>FormDienThoaiVien.cs</DependentUpon>
     </EmbeddedResource>
