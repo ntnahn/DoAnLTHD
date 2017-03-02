@@ -166,4 +166,8 @@ input[type="text"]:active {
 }
 .btn-disable {
     background: darkslategrey;
+    cursor: not-allowed;
+}
+.btn-disable:hover {
+    background: darkslategrey;
 }
