@@ -23,7 +23,7 @@ mongoose.connect(mongoURL, (error) => {
 });
 
 const app = new Express();
-var pointRoute = require('./server/routes/point.routes.js');
+var pointRoute = require('./server/routes/client.routes.js');
 var userRoute = require('./server/routes/user.routes.js');
 // Use to receive json from body post method
 app.use(bodyParser.json({ limit: '20mb' }));
