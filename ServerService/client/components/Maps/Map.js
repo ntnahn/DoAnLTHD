@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import callApi from '../../util/apiCaller';
 export default class Map extends Component {
   constructor(props) {
     super(props);
@@ -7,13 +8,14 @@ export default class Map extends Component {
     };
     
     this.yourMarker = null;
-    this.driverLocations = [
-      {lat: 10.767647398680138, lng: 106.67454242706299},
-      {lat: 10.759173173901845, lng: 106.67752504348755},
-      {lat: 10.75740241027677, lng: 106.66718244552612},
-      {lat: 10.763347075583702, lng: 106.6592001914978}
-    ];
+    // this.driverLocations = [
+    //   {lat: 10.767647398680138, lng: 106.67454242706299},
+    //   {lat: 10.759173173901845, lng: 106.67752504348755},
+    //   {lat: 10.75740241027677, lng: 106.66718244552612},
+    //   {lat: 10.763347075583702, lng: 106.6592001914978}
+    // ];
     this.driverMarkers = [];
+    this.drivers = [];
 
     this.handleGeocode = this.handleGeocode.bind(this);
     this.handleAddressChange = this.handleAddressChange.bind(this);
@@ -22,6 +24,16 @@ export default class Map extends Component {
     if(props.address&&props.address!=='') {
       Promise.resolve(this.setState({address: props.address})).then(()=>{
         this.geocodeAddress();
+      });
+    }
+    let clientInfo = props.clientInfo;
+    if(clientInfo&&clientInfo.id) {
+      // Lấy thông tin các tài xế theo loại xe mà khách hàng yêu cầu
+      // Sau đó hiện markers tài xế lên map
+      callApi(`user/${clientInfo.type}`, 'get').then(drivers => {
+        this.drivers = drivers;
+        // Gọi hàm add markers tài xế vô map
+        this.loadDriverMarkers();
       });
     }
   }
@@ -44,12 +56,6 @@ export default class Map extends Component {
       </div>
     );
   }
-  handleGeocode() {
-    this.geocodeAddress();
-  }
-  handleAddressChange(event) {
-    this.setState({address: event.target.value});
-  }
   componentDidMount() {
     window.onload = () => {
       this.map = new google.maps.Map(this.mapElement, {
@@ -71,10 +77,16 @@ export default class Map extends Component {
         console.log('location: ');
         console.log(`{lat: ${lat}, lng: ${lng}}`);
       });
-
-      this.loadDriverMarkers();
     };
   }
+
+  handleGeocode() {
+    this.geocodeAddress();
+  }
+  handleAddressChange(event) {
+    this.setState({address: event.target.value});
+  }
+
   replaceYourMarker(location) {
     // Nếu đã geocode rồi thì mới có cái để replace
     if(this.yourMarker) {
@@ -141,17 +153,19 @@ export default class Map extends Component {
   }
 
   /**
+   * Receive driver with location info
    * Location: {lat: 10.766688427994012, lng: 106.68370485305786}
-   * @param location
+   * @param driver
    */
-  addDriverMarker(location) {
+  addDriverMarker(driver) {
     let marker = new google.maps.Marker({
-      position: location,
+      position: driver.location,
       map: this.map,
       icon:'images/bike_location_icon40x40.png'
     });
-    marker.addListener('click', function() {
-      console.log('Driver marker click');
+    marker.driver = driver;
+    marker.addListener('click', ()=>{
+      console.log('Driver marker click', marker);
       // todo: Lấy thông tin của marker(tài khoản của tài xế)
       // Sau khi chọn tài xế, nhấn nút gửi yêu cầu để
       // => Send the socket request to App tài xế
@@ -162,14 +176,15 @@ export default class Map extends Component {
 
   // Tải marker từ địa điểm của các xe ở gần
   loadDriverMarkers() {
-    this.driverLocations.map((location)=>{
-      this.addDriverMarker(location);
+    console.log('this.drivers:', this.drivers);
+    this.drivers.map((driver)=>{
+      this.addDriverMarker(driver);
     });
   }
 
   // Sets the map on all markers in the array.
   setMapForDriverMarker(map) {
-    this.driverLocations.map((marker)=>{
+    this.driverMarkers.map((marker)=>{
       marker.setMap(map);
     });
   }
@@ -192,6 +207,7 @@ export default class Map extends Component {
 }
 Map.propTypes = {
   address: PropTypes.string,
+  clientInfo: PropTypes.object
 };
 
 /**

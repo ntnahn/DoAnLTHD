@@ -6,8 +6,8 @@ const userSchema = new Schema({
     password: {type: String, require: true},
     location: {
         lat: {type: Number, require: true},
-        long: {type: Number, require: true}
+        lng: {type: Number, require: true}
     },
-    vehicletype: {type: String}
+    vehicletype: {type: String} // normal || premium
 });
 module.exports = mongoose.model('User', userSchema);

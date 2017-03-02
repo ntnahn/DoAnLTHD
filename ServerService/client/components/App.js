@@ -1,21 +1,30 @@
 import React, {Component, PropTypes} from 'react';
 import Map from './Maps/Map';
 import callApi from '../util/apiCaller';
+import ChatSocket from '../util/socketController';
 export default class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      clientInfo: null
+      clientInfo: null,
+      requesting: false
     };
 
     this.loadClient = this.loadClient.bind(this);
+    this.handleSendRequest = this.handleSendRequest.bind(this);
   }
 
   loadClient() {
     callApi('client/get-client-to-handle', 'get').then(client => {
       console.log('client', client);
       this.setState({clientInfo: client});
+    });
+  }
+  handleSendRequest() {
+    // Disable to can not click after process finished
+    this.buttonSendRequest.disabled = 'true';
+    this.chatSocket.emitDriverRequest({
     });
   }
   render() {
@@ -30,7 +39,7 @@ export default class App extends Component {
         </div>
         <div className="content">
           <div className="content-left">
-            <Map address={address}/>
+            <Map address={address} clientInfo={this.state.clientInfo}/>
           </div>
           <div className="content-right">
             <button onClick={this.loadClient} type="button" className="button btn-nap-diem">Nạp điểm</button>
@@ -40,8 +49,12 @@ export default class App extends Component {
               rows={4}
               className={`note-area ${address===''?'hidden':''}`}
               value={note}
-              disabled="true"
-            />
+              disabled="true" />
+            <button
+              ref={node=>this.buttonSendRequest=node}
+              onClick={this.handleSendRequest} type="button"
+              className={`button btn-send-request ${this.state.requesting?'btn-disable':''}`}>
+              Gửi yêu cầu</button>
           </div>
         </div>
         <div className="footer">
@@ -51,5 +64,8 @@ export default class App extends Component {
         </div>
       </div>
     );
+  }
+  componentDidMount() {
+    this.chatSocket = new ChatSocket();
   }
 }
